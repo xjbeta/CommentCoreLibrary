@@ -59,6 +59,9 @@ class CoreComment implements IComment {
   protected _transform:CommentUtils.Matrix3D = null;
   protected _className:string = '';
 
+  public _imageSrc:string = '';
+  public _imageWidth:number = 0;
+
   public parent:ICommentManager;
   public dom:HTMLDivElement;
 
@@ -149,6 +152,12 @@ class CoreComment implements IComment {
         }
       }
     }
+    if (init.hasOwnProperty('imageSrc') && init['imageSrc'] != undefined) {
+      this._imageSrc = init['imageSrc'];
+    }
+    if (init.hasOwnProperty('imageWidth')) {
+      this._imageWidth = init['imageWidth'];
+    }
     if (init.hasOwnProperty('className')) {
       this._className = init['className'];
     }
@@ -217,6 +226,15 @@ class CoreComment implements IComment {
     if (this.motion.length > 0) {
       // Force a position update before doing anything
       this.animate();
+    }
+
+    if (this._imageSrc !== '') {
+      const image = document.createElement('img');
+      image.src = this._imageSrc;
+      if (this._imageWidth > 0) {
+        image.width = this._imageWidth;
+      }
+      this.dom.appendChild(image);
     }
   }
 
