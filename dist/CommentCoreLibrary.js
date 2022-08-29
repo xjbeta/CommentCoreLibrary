@@ -375,9 +375,12 @@ var CommentManager = (function() {
 })();
 
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -407,6 +410,8 @@ var CoreComment = (function () {
         this._font = '';
         this._transform = null;
         this._className = '';
+        this._imageSrc = '';
+        this._imageWidth = 0;
         if (!parent) {
             throw new Error('Comment not bound to comment manager.');
         }
@@ -495,6 +500,12 @@ var CoreComment = (function () {
                 }
             }
         }
+        if (init.hasOwnProperty('imageSrc') && init['imageSrc'] != undefined) {
+            this._imageSrc = init['imageSrc'];
+        }
+        if (init.hasOwnProperty('imageWidth')) {
+            this._imageWidth = init['imageWidth'];
+        }
         if (init.hasOwnProperty('className')) {
             this._className = init['className'];
         }
@@ -557,6 +568,14 @@ var CoreComment = (function () {
         }
         if (this.motion.length > 0) {
             this.animate();
+        }
+        if (this._imageSrc !== '') {
+            var image = document.createElement('img');
+            image.src = this._imageSrc;
+            if (this._imageWidth > 0) {
+                image.width = this._imageWidth;
+            }
+            this.dom.appendChild(image);
         }
     };
     Object.defineProperty(CoreComment.prototype, "x", {
@@ -1009,9 +1028,12 @@ var CommentFactory = (function () {
 }());
 
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -1227,9 +1249,12 @@ var CommentUtils;
 })(CommentUtils || (CommentUtils = {}));
 
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -1279,7 +1304,7 @@ var CssScrollComment = (function (_super) {
     CssScrollComment.prototype.update = function () {
         if (this._dirtyCSS) {
             this.dom.style.transition = "transform " + this.ttl + "ms linear";
-            this.x = -this.dom.offsetWidth;
+            this.x = -this.width;
             this._dirtyCSS = false;
         }
     };
