@@ -70,7 +70,7 @@ class CssScrollComment extends ScrollComment {
       return; // DOM not created yet, do nothing
     } else {
       // Clear the transition to prepare for a rewrite
-      this.dom.style.transition = '';
+      this.dom.style.transition = 'webkitTransitionEnd';
       this.x = this.x;
     }
   }
