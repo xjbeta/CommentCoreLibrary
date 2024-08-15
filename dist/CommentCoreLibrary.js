@@ -615,7 +615,7 @@ var CoreComment = (function () {
                 this.dom.style.right = (this._x + (this.align % 2 === 0 ? -this.width : 0)) + 'px';
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "y", {
@@ -655,7 +655,7 @@ var CoreComment = (function () {
                 this.dom.style.bottom = (this._y + (this.align < 2 ? -this.height : 0)) + 'px';
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "bottom", {
@@ -663,7 +663,7 @@ var CoreComment = (function () {
             var sameDirection = Math.floor(this.axis / 2) === Math.floor(this.align / 2);
             return this.y + (sameDirection ? this.height : 0);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "right", {
@@ -671,7 +671,7 @@ var CoreComment = (function () {
             var sameDirection = this.axis % 2 === this.align % 2;
             return this.x + (sameDirection ? this.width : 0);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "width", {
@@ -685,7 +685,7 @@ var CoreComment = (function () {
             this._width = w;
             this.dom.style.width = this._width + 'px';
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "height", {
@@ -699,7 +699,7 @@ var CoreComment = (function () {
             this._height = h;
             this.dom.style.height = this._height + 'px';
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "size", {
@@ -710,7 +710,7 @@ var CoreComment = (function () {
             this._size = s;
             this.dom.style.fontSize = this._size + 'px';
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "color", {
@@ -726,7 +726,7 @@ var CoreComment = (function () {
                 this._toggleClass('reverse-shadow', true);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "alpha", {
@@ -738,7 +738,7 @@ var CoreComment = (function () {
             this.dom.style.opacity =
                 Math.min(this._alpha, this.parent.options.global.opacity) + '';
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "border", {
@@ -754,7 +754,7 @@ var CoreComment = (function () {
                 this.dom.style.border = 'none';
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "shadow", {
@@ -767,7 +767,7 @@ var CoreComment = (function () {
                 this._toggleClass('no-shadow', true);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "font", {
@@ -783,7 +783,7 @@ var CoreComment = (function () {
                 this.dom.style.fontFamily = '';
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "transform", {
@@ -796,7 +796,7 @@ var CoreComment = (function () {
                 this.dom.style.transform = this._transform.toCss();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(CoreComment.prototype, "className", {
@@ -807,7 +807,7 @@ var CoreComment = (function () {
             this._className = className;
             this.dom.className = this.parent.options.global.className + ' ' + className;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     CoreComment.prototype.time = function (time) {
@@ -887,7 +887,7 @@ var ScrollComment = (function (_super) {
             this._alpha = a;
             this.dom.style.opacity = Math.min(Math.min(this._alpha, this.parent.options.global.opacity), this.parent.options.scroll.opacity) + '';
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ScrollComment.prototype.init = function (recycle) {
@@ -1186,7 +1186,7 @@ var CommentUtils;
             set: function (_array) {
                 throw new Error('Not permitted. Matrices are immutable.');
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Matrix3D.prototype.isIdentity = function () {
@@ -1298,7 +1298,7 @@ var CssScrollComment = (function (_super) {
                 this.dom.style.right = this._calculateX() + 'px';
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     CssScrollComment.prototype.update = function () {
@@ -1315,7 +1315,7 @@ var CssScrollComment = (function (_super) {
             return;
         }
         else {
-            this.dom.style.transition = '';
+            this.dom.style.transition = 'webkitTransitionEnd';
             this.x = this.x;
         }
     };
